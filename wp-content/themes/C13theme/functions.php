@@ -16,3 +16,29 @@ function c13theme_setup(){
 }
 
 add_action('init','c13theme_setup');
+
+/**
+ * THEME SUPPORT
+ */
+
+ add_theme_support('custom-background');
+ add_theme_support('custom-header');
+ add_theme_support('post-thumbnails');
+
+ add_theme_support('post-formats',['aside', 'image', 'video']);
+
+function c13theme_sidebar_Setup(){
+    register_sidebar([
+        'name'=> 'Sidebar',
+        'id'=>'sidebar-1',
+        'class'=>'custom',
+        'description'=> 'Standard Sidebar',
+        'before_widget'  => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'   => "</aside>\n",
+		'before_title'   => '<h2 class="widgettitle">',
+		'after_title'    => "</h2>\n",
+        'show_in_rest'   => false
+    ]);
+}
+
+add_action('widgets_init', 'c13theme_sidebar_Setup');

@@ -2,16 +2,16 @@
 
 <?php
     if (have_posts()):
-        while (have_posts()): the_post();?>
+        while (have_posts()): the_post() ;?>
 
-        <h3><?php the_title(); ?></h3>
-        <small>Posted On <?php the_time('F j, Y') ?> at <?php the_time('g:i a') ?></small>
-        <p><?php the_content(); ?></p>
-        <small><?php the_category(); ?></small>
-        <hr>
+        <?php // require 'content.php' ?>
+        <?php get_template_part('content', get_post_format()) ?>
         
     <?php endwhile; ?>
 <?php endif; ?>
 
+<h1 class="mysidebar">
+    <?php get_sidebar(); ?>
+</h1>
 
 <?php get_footer(); ?>
