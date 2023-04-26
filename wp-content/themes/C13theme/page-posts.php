@@ -12,7 +12,10 @@
         
         if ($blogs->have_posts()):
             while($blogs->have_posts()):$blogs->the_post();?>
-            <h2><?php the_title(); ?></h2>
+            <header>
+            <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
+            </header>
+
             <p><?php the_content(); ?></p>
             
             <?php
@@ -28,7 +31,7 @@
         
         if ($blogs->have_posts()):
             while($blogs->have_posts()):$blogs->the_post();?>
-            <h2><?php the_title(); ?></h2>
+            <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
             <p><?php the_content(); ?></p>
 
             <?php
@@ -45,7 +48,7 @@
         
         if ($blogs->have_posts()):
             while($blogs->have_posts()):$blogs->the_post();?>
-            <h2><?php the_title(); echo ' CATEGORY ->'; the_category(); ?></h2>
+            <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
             <p><?php the_content(); ?></p>
 
             <?php
@@ -61,7 +64,7 @@
         
         if ($blogs->have_posts()):
             while($blogs->have_posts()):$blogs->the_post();?>
-            <h2><?php the_title(); echo ' CATEGORY ->'; the_category(); ?></h2>
+            <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
             <p><?php the_content(); ?></p>
 
             <?php
@@ -82,7 +85,7 @@
         
         if ($blogs->have_posts()):
             while($blogs->have_posts()):$blogs->the_post();?>
-            <h2><?php the_title(); echo ' CATEGORY ->'; the_category(); ?></h2>
+            <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
             <p><?php the_content(); ?></p>
 
             <?php
@@ -112,7 +115,9 @@
             
             if ($blogs->have_posts()):
                 while($blogs->have_posts()):$blogs->the_post();?>
-                <h2><?php the_title(); echo ' CATEGORY ->'; the_category(); ?></h2>
+                <header>
+                <h3><?php the_title(sprintf('<h2 class="entry-title"><a href= "%s">', esc_url(get_permalink() )), '</a></h2>'); ?></h3>
+                </header>
                 <p><?php the_content(); ?></p>
 
                 <?php

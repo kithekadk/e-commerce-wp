@@ -42,3 +42,6 @@ function c13theme_sidebar_Setup(){
 }
 
 add_action('widgets_init', 'c13theme_sidebar_Setup');
+
+// Converting HTML TO HTML5 FOR  SEARCH FORM
+add_theme_support('html5', ['search-form']);
