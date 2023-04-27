@@ -10,7 +10,7 @@
     <header>
     <?php 
         endwhile;
-    endif;
+        endif;
     ?>
 
     <!-- ACTIVATING COMMENTS -->
@@ -18,6 +18,10 @@
         if(comments_open()){
             comments_template();
         }
-
     ?>
+
+    <!-- Pagination to posts -->
+    <div>
+        <?php previous_post_link();?> &nbsp; <?php next_post_link()?>
+    </div>
 <?php get_footer();?>

@@ -8,6 +8,10 @@
         <?php get_template_part('content', get_post_format()) ?>
         
     <?php endwhile; ?>
+
+    <!-- POST PAGINATION -->
+    <?php next_posts_link('<< Older posts')?>
+    <?php previous_posts_link('Newer posts >>')?>
 <?php endif; ?>
 
 <h1 class="mysidebar">
