@@ -5,10 +5,10 @@
             //while(have_posts()): the_post();
     ?>
     <!-- <h3 style="color:red;"><?php the_title(); ?></h3> -->
-    <p><?php// the_content(); ?></p>
+    <p><?php // the_content(); ?></p>
 
-    <?php// endwhile; ?>
-    <?php// endif; ?>
+    <?php // endwhile; ?>
+    <?php // endif; ?>
 
     <form>
   <div class="form-group">
