@@ -1,0 +1,26 @@
+2023-05-02T08:59:12+00:00 CRITICAL syntax error, unexpected token "=", expecting "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 68
+
+2023-05-02T09:11:02+00:00 CRITICAL syntax error, unexpected token "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 100
+
+2023-05-02T09:11:03+00:00 CRITICAL syntax error, unexpected token "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 100
+
+2023-05-02T09:11:04+00:00 CRITICAL syntax error, unexpected token "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 100
+
+2023-05-02T09:13:22+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 105
+
+2023-05-02T11:14:47+00:00 CRITICAL syntax error, unexpected token ".", expecting "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 112
+
+2023-05-02T11:15:29+00:00 CRITICAL syntax error, unexpected token "=", expecting "]" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 114
+
+2023-05-02T11:16:48+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 119
+
+2023-05-02T11:17:30+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 122
+
+2023-05-02T11:18:49+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 128
+
+2023-05-02T11:19:31+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 131
+
+2023-05-02T11:21:32+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 137
+
+2023-05-02T11:21:47+00:00 CRITICAL syntax error, unexpected token "}" in C:\xampp\htdocs\customtheme\wp-content\themes\C13theme\functions.php on line 137
+

@@ -59,3 +59,81 @@ add_action('widgets_init', 'c13theme_sidebar_Setup');
 
 // Converting HTML TO HTML5 FOR  SEARCH FORM
 add_theme_support('html5', ['search-form']);
+
+// CUSTOM POST TYPE
+
+function portfolio_post_type(){
+    $labels = [
+        'name'=> 'Portfolios',
+        'singular_name'=> 'Portfolio',
+        'add_new'=> 'Add Portfolio Item',
+        'all_items'=> 'All Portfolios',
+        'add_new_item'=> 'Edit Item',
+        'new_item'=> 'New Items',
+        'view_item'=> 'View Item',
+        'search_item'=> 'Search Portfolio',
+        'not_found'=> 'No Items found',
+        'not_found_in_trash'=> 'No Items found in trash',
+        'parent_item_colon'=> 'Parent Item'
+    ];
+
+    $args = [
+        'labels'=> $labels,
+        'public'=> true,
+        'has_archive'=> true,
+        'publicly_queryable'=> true,
+        'query_var'=> true,
+        'rewrite'=>true,
+        'capability'=> 'post',
+        'hierarchical' => false,
+        'supports'=>[
+            'title',
+            'editor',
+            'excerpt',
+            'thumbnail',
+            'revisions',
+        ],
+        'taxonomies'=>[
+            'category',
+            'post_tag',
+            'menu_position'=> 5,
+            'exclude_from_search'=> false
+        ]
+    ];
+
+    register_post_type('portfolio', $args);
+}
+
+add_action('init', 'portfolio_post_type');
+
+// CUSTOM TAXONOMY
+function career_custom_taxonomy(){
+    $labels = [
+        'name'=> 'Careers',
+        'singular_name'=> 'Career',
+        'search_items'=> 'Search Careers',
+        'all_items'=>'All Careers',
+        'parent_item'=> 'Parent Career',
+        'parent_item_colon'=> 'Parent Career',
+        'edit_item'=> 'Edit Career',
+        'update_item'=> 'Update Career',
+        'add_new_item'=> 'Add New Career',
+        'new_item_name'=> 'New Career Name',
+        'menu_name'=>'Careers'
+    ];
+
+    $args = [
+        'labels'=> $labels,
+        'hierarchical'=>true,
+        'show_ui'=>true,
+        'show_admin_column'=>true,
+        'query_var'=>true,
+        'rewrite'=>[
+            'slug'=>'career'
+        ]
+        ];
+
+    register_taxonomy('career', ['portfolio'], $args);
+}
+
+add_action('init', 'career_custom_taxonomy');
