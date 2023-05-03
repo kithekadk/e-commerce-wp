@@ -134,6 +134,43 @@ function career_custom_taxonomy(){
         ];
 
     register_taxonomy('career', ['portfolio'], $args);
+
+    // NON-HIERARCHICAL TAXONOMY
+    register_taxonomy('software', ['portfolio'], [
+        'hierarchical'=> false,
+        'label'=> 'Software',
+        'show_ui'=>true,
+        'show_admin_column'=>true,
+        'query_var'=>true,
+        'rewrite'=>[
+            'slug'=> 'software'
+        ]
+    ]);
 }
 
 add_action('init', 'career_custom_taxonomy');
+
+// CUSTOM TERM FUNCTION
+
+function customterm_get_terms($postID, $term){
+    $termslist = wp_get_post_terms($postID, $term);
+
+    $i = 0;
+
+    $output = '';
+
+    foreach ($termslist as $term){
+        $i++;
+
+        if ($i > 1){
+            $output .= ', ';
+        }
+
+        // $output .= $term->name;
+        // $output .= get_term_link($term);
+        $output .= '<a href="'.get_term_link($term).'" >' .$term->name. '</a>';
+
+    }
+
+    return $output;
+}
