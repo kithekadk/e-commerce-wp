@@ -20,6 +20,7 @@ defined('ABSPATH') or die('Hey you hacker, got you!');
 class BookReg{
     function __construct(){
         $this->add_book_to_db();
+        $this->createLibrarian();
     }
 
     function activateExternally(){
@@ -74,6 +75,23 @@ class BookReg{
                 // echo "<script> alert('Unable to Register'); </script>";
             }
         }
+    }
+
+    function createLibrarian(){
+        add_role(
+            'librarian',
+            'Librarian',
+            [
+                'read'=> true,
+                'edit_posts'=>true,
+                'edit_pages'=>true,
+                'upload_files'=> true,
+                'delete_posts'=>true,
+                'edit_published_posts'=> true,
+                'delete_published_pages'=>true,
+                'delete_published_posts'=>true
+            ]
+        );
     }
 }
 
