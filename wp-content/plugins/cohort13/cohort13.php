@@ -19,7 +19,10 @@ defined('ABSPATH') or die('Security breaches identified');
 
 class RegisterMembers{
     function __construct(){
+        $this->plugin = plugin_basename(__FILE__);
+
         add_action('init', [$this, 'members_post_type']);
+
     }
 
     public function activate(){
@@ -73,6 +76,29 @@ class RegisterMembers{
         register_post_type('members', $args);
     }
 
+    public $plugin;
+    function registerPage(){
+        add_action('admin_menu', [$this, 'add_admin_page']);
+
+        // SETTINGS LINK
+        add_filter("plugin_action_links_$this->plugin", [$this, 'settings_link']);
+    }
+
+    // Settings LINK
+    function settings_link($links){
+        $settingslink = '<a href="admin.php?page=register_book">Register Book</a>';
+
+        array_push($links, $settingslink);
+        return $links;
+    }
+
+    function add_admin_page(){
+        add_menu_page('Book Registration', 'Register Book', 'manage_options', 'register_book', [$this, 'admin_index_cb'], 'dashicons-welcome-write-blog', 110);
+    }
+
+    function admin_index_cb(){
+        require_once plugin_dir_path(__FILE__).'templates/bookregister.php';
+    }    
 
 }
 
@@ -85,3 +111,4 @@ if (class_exists('RegisterMembers')){
 
 $RegisterMembersInstance->activate();
 $RegisterMembersInstance->deactivate();
+$RegisterMembersInstance->registerPage();

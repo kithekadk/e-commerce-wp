@@ -69,10 +69,10 @@ class BookReg{
 
             if($result == true){
                 $successmessage = true;
-                // echo "<script> alert('Book Registered successfully'); </script>";
+                echo "<script> alert('Book Registered successfully'); </script>";
             }else{
                 $errormessage = true;
-                // echo "<script> alert('Unable to Register'); </script>";
+                echo "<script> alert('Unable to Register'); </script>";
             }
         }
     }
