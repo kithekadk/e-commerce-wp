@@ -1,0 +1,18 @@
+{
+    "name": "kitheka/cohort13",
+    "description": "This is a plugin utilising composer",
+    "type": "project",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Cohort 13"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./inc"
+        }
+    }
+}

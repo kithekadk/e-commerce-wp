@@ -2,8 +2,8 @@
 /**
  * @package Cohort13Plugin
  */
-
-class Cohort13Deactivate{
+namespace Inc;
+class Deactivate{
     static function deactivate(){
         flush_rewrite_rules();
     }

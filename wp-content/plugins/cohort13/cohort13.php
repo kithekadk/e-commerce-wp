@@ -17,7 +17,14 @@
 // security check
 defined('ABSPATH') or die('Security breaches identified');
 
-class RegisterMembers{
+if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
+    require_once(dirname(__FILE__).'/vendor/autoload.php');
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+
+class Cohort13{
     function __construct(){
         $this->plugin = plugin_basename(__FILE__);
 
@@ -26,12 +33,12 @@ class RegisterMembers{
     }
 
     public function activate(){
-        require_once plugin_dir_path(__FILE__). 'inc/cohort13-activate.php';
-        Cohort13Activate::activate();
+        // require_once plugin_dir_path(__FILE__). 'inc/Activate.php';
+        Activate::activate();
     }
     public function deactivate(){
-        require_once plugin_dir_path(__FILE__). 'inc/cohort13-deactivate.php';
-        Cohort13Deactivate::deactivate();
+        // require_once plugin_dir_path(__FILE__). 'inc/cohort13-deactivate.php';
+        Deactivate::deactivate();
     }
 
     function members_post_type(){
@@ -102,13 +109,13 @@ class RegisterMembers{
 
 }
 
-if (class_exists('RegisterMembers')){
-    $RegisterMembersInstance = new RegisterMembers();
+if (class_exists('Cohort13')){
+    $Cohort13Instance = new Cohort13();
 }
 
-// register_activation_hook(__FILE__, [$RegisterMembersInstance, 'activate']);
-// register_deactivation_hook(__FILE__, [$RegisterMembersInstance, 'deactivate']);
+// register_activation_hook(__FILE__, [$Cohort13Instance, 'activate']);
+// register_deactivation_hook(__FILE__, [$Cohort13Instance, 'deactivate']);
 
-$RegisterMembersInstance->activate();
-$RegisterMembersInstance->deactivate();
-$RegisterMembersInstance->registerPage();
+$Cohort13Instance->activate();
+$Cohort13Instance->deactivate();
+// $Cohort13Instance->registerPage();
