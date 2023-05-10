@@ -3,10 +3,10 @@
  * @package Cohort13Plugin
  */
 
- namespace Inc;
+ namespace Inc\Base;
  class Activate{
     static function activate(){
-        RegisterBook::registerBook();
+        // RegisterBook::registerBook();
         flush_rewrite_rules();
     }
  }
