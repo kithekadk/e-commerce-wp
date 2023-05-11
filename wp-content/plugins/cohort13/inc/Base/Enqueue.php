@@ -5,14 +5,17 @@
 
 namespace Inc\Base;
 
-class Enqueue{
+use \Inc\Base\BaseController;
+
+class Enqueue extends BaseController{
     public function register(){
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
     }
 
     function enqueueScripts(){
-        wp_enqueue_style('cohort13pluginstyles', PLUGIN_URL.'assets/mystyle.css');
-        wp_enqueue_script('cohort13pluginscript', PLUGIN_URL.'assets/myscript.js');
+        // var_dump($this->plugin_url.'assets/mystyle.css');
+        wp_enqueue_style('cohort13pluginstyles', $this->plugin_url.'assets/mystyle.css');
+        wp_enqueue_script('cohort13pluginscript', $this->plugin_url.'assets/myscript.js');
 
         // BOOTSTRAP
         wp_register_style('bootstrapstyle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', [], '5.2.3', 'all');

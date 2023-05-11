@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center w-100 h-100">
+<div class="d-flex justify-content-center align-items-center w-100 h-100 overall">
 
 <?php
     global $successmessage;

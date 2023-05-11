@@ -5,16 +5,12 @@
 
 namespace Inc\Base;
 
-class SettingsLinks{
-    
-    function __construct(){
-        // $this->pluginfilename = PLUGIN_BASENAME;
-    }
+class SettingsLinks extends BaseController{
 
     // public $pluginfilename;
     function register(){
         // add_filter("plugin_action_links_$this->pluginfilename", [$this, 'settings_link']);
-        add_filter("plugin_action_links_".PLUGIN_BASENAME, [$this, 'settings_link']);
+        add_filter("plugin_action_links_".$this->plugin_basename, [$this, 'settings_link']);
     }
 
     public function settings_link($links){
