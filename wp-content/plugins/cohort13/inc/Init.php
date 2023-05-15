@@ -10,9 +10,11 @@ class Init{
     public static function get_services(){
         return [
             Pages\AdminPage::class,
+            Pages\AdminPageWithCallbacks::class,
             Base\Enqueue::class,
             Base\SettingsLinks::class,
-            Pages\RegisterBook::class
+            Pages\RegisterBook::class,
+            Pages\RegisterMember::class
         ];
     }
 

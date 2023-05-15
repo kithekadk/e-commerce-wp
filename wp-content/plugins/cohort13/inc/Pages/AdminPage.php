@@ -14,18 +14,19 @@ class AdminPage extends BaseController{
     public $settings;
 
     public $pages;
+    public $subpages;
 
     public function __construct(){
         $this->settings = new SettingsApi();
         
     $this->pages= [
         [
-            'page_title'=> 'Book Registration',
-            'menu_title'=> 'Register Book',
+            'page_title'=> 'Books Menu',
+            'menu_title'=> 'Book Menu',
             'capability' => 'manage_options',
-            'menu_slug'=> 'register_book',
+            'menu_slug'=> 'books_menu',
             'callback'=> function(){
-                echo '<h1> Cohort 13 Admin Page </h1>';
+                echo '<h1> Cohort 13 Books Menu </h1>';
             },
             'icon_url'=> 'dashicons-welcome-write-blog',
             'position'=> 110
@@ -42,11 +43,74 @@ class AdminPage extends BaseController{
             'position'=> 111
         ]
     ];
+
+    $this->subpages =[
+        [
+            'parent_slug'=> 'books_menu',
+            'page_title' => 'Register books',
+            'menu_title' => 'Register Books',
+            'capability' => 'manage_options',
+            'menu_slug' => 'register_books',
+            'callback' => function() {
+                echo '<h1> Register Books </h1>';
+            }
+        ],
+        [
+            'parent_slug'=> 'books_menu',
+            'page_title' => 'Update BOOK',
+            'menu_title' => 'Update BOOK',
+            'capability' => 'manage_options',
+            'menu_slug' => 'update_books',
+            'callback' => function() {
+                echo '<h1> Update Book </h1>';
+            }
+        ],
+        [
+            'parent_slug'=> 'books_menu',
+            'page_title' => 'View Authors',
+            'menu_title' => 'View Authors',
+            'capability' => 'manage_options',
+            'menu_slug' => 'view_authors',
+            'callback' => function() {
+                echo '<h1> View Authors of the different Books </h1>';
+            }
+        ],
+        [
+            'parent_slug'=> 'contact_us',
+            'page_title' => 'Facebook ',
+            'menu_title' => 'Facebook',
+            'capability' => 'manage_options',
+            'menu_slug' => 'social_facebook',
+            'callback' => function() {
+                echo '<h1> View our Facebook page </h1>';
+            }
+        ],
+        [
+            'parent_slug'=> 'contact_us',
+            'page_title' => 'Instagram',
+            'menu_title' => 'Instagram',
+            'capability' => 'manage_options',
+            'menu_slug' => 'social_instagram',
+            'callback' => function() {
+                echo '<h1> View our Instagram page </h1>';
+            }
+        ],
+        [
+            'parent_slug'=> 'contact_us',
+            'page_title' => 'Twitter',
+            'menu_title' => 'Twitter',
+            'capability' => 'manage_options',
+            'menu_slug' => 'social_twitter',
+            'callback' => function() {
+                echo '<h1> View our Twitter page </h1>';
+            }
+        ]
+    ];
     }
 
     function register(){
         // add_action('admin_menu', [$this, 'add_admin_page']);
-        $this->settings->AddPages( $this->pages )->register();
+        $this->settings->AddPages( $this->pages )->HasSubPage('View Books')->addSubPages($this->subpages)->register();
     }
 
 
