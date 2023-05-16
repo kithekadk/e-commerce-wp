@@ -30,7 +30,13 @@ class AdminPageWithCallbacks extends BaseController{
 
         $this->createSubMenus();
 
-        $this->settings->AddPages( $this->pages )->HasSubPage('View Members')->addSubPages($this->subpages)->register();
+        $this->setSettings();
+
+        $this->setSections();
+
+        $this->setFields();
+
+        $this->settings->AddPages( $this->pages )->HasSubPage('Create Members')->addSubPages($this->subpages)->register();
     }
 
     public function createAdminMenus(){
@@ -66,6 +72,80 @@ class AdminPageWithCallbacks extends BaseController{
                 'callback' => [$this->callbacks, 'updateMembers']
             ]
         ];
+    }
+
+    public function setSettings(){
+        $params = [
+            [
+                'option_group'=> 'cohort13_options_group',
+                'option_name'=> 'first_name',
+                'callback'=>[$this->callbacks, 'c13OptionsGroup']
+            ],
+            [
+                'option_group'=> 'cohort13_options_group',
+                'option_name'=> 'second_name',
+            ],
+            [
+                'option_group'=> 'cohort13_options_group',
+                'option_name'=> 'cohort_name',
+            ]
+        ];
+
+        $this->settings->setSettings($params);
+    }
+
+    public function setSections(){
+        $params = [
+            [
+                'id'=> 'c13_admin_index',
+                'title'=> 'Cohort 13 Settings section',
+                'callback' => [$this->callbacks, 'c13AdminIndex'],
+                'page' => 'members_menu' //get this from menu slu of the first menu
+            ]
+        ];
+
+        $this->settings->setSections($params);
+    }
+
+    public function setFields(){
+        $params = [
+            [
+                'id'=> 'first_name', //identical to value of option_name
+                'title'=> 'First Name',
+                'callback'=> [$this->callbacks, 'c13InputText'],
+                'page'=> 'members_menu',
+                'section'=> 'c13_admin_index',
+                'args'=>[
+                    'label_for' => 'first_name',
+                    'class'=> 'example-class'
+                ]
+            ],
+            [
+                'id'=> 'second_name', //identical to value of option_name
+                'title'=> 'Second Name',
+                'callback'=> [$this->callbacks, 'c13SecondName'],
+                'page'=> 'members_menu',
+                'section'=> 'c13_admin_index',
+                'args'=>[
+                    'label_for' => 'second_name',
+                    'class'=> 'example-class'
+                ]
+            ],
+            [
+                'id'=> 'cohort_name', //identical to value of option_name
+                'title'=> 'Cohort Name',
+                'callback'=> [$this->callbacks, 'c13CohortName'],
+                'page'=> 'members_menu',
+                'section'=> 'c13_admin_index',
+                'args'=>[
+                    'label_for' => 'cohort_name',
+                    'class'=> 'example-class'
+                ]
+            ],
+
+        ];
+
+        $this->settings->setFields($params);
     }
 
 }
