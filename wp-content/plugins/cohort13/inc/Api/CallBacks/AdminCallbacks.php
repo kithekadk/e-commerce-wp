@@ -21,6 +21,17 @@ class AdminCallbacks extends BaseController{
         return require_once $this->plugin_path.'templates/updateMembers.php';
     }
 
+    // ABOUT TRAINEES
+    public function viewTraineesCB(){
+        return require_once $this->plugin_path.'templates/viewtrainees.php'; 
+    }
+    public function registerTraineeCB(){
+        return require_once $this->plugin_path.'templates/marksentry.php'; 
+    }
+    public function updateTraineeCB(){
+        return require_once $this->plugin_path.'templates/updatemarks.php'; 
+    }
+
     // CUSTOM FIELD METHODS
     public function c13OptionsGroup($input){
         return $input;

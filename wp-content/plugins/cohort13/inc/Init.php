@@ -14,7 +14,8 @@ class Init{
             Base\Enqueue::class,
             Base\SettingsLinks::class,
             Pages\RegisterBook::class,
-            Pages\RegisterMember::class
+            Pages\RegisterMember::class,
+            Pages\TraineeDetails::class
         ];
     }
 

@@ -36,11 +36,20 @@ class AdminPageWithCallbacks extends BaseController{
 
         $this->setFields();
 
-        $this->settings->AddPages( $this->pages )->HasSubPage('Create Members')->addSubPages($this->subpages)->register();
+        $this->settings->AddPages( $this->pages )->HasSubPage('View All')->addSubPages($this->subpages)->register();
     }
 
     public function createAdminMenus(){
         $this->pages= [
+            [
+                'page_title'=> 'Trainees',
+                'menu_title'=> 'Trainees',
+                'capability' => 'manage_options',
+                'menu_slug'=> 'trainees',
+                'callback'=> [$this->callbacks, 'viewTraineesCB'],
+                'icon_url'=> 'dashicons-buddicons-buddypress-logo',
+                'position'=> 105
+            ],
             [
                 'page_title'=> 'Members Menu',
                 'menu_title'=> 'Members Menu',
@@ -55,6 +64,22 @@ class AdminPageWithCallbacks extends BaseController{
 
     public function createSubMenus(){
         $this->subpages =[
+            [
+                'parent_slug'=> 'trainees',
+                'page_title' => 'Register Trainee',
+                'menu_title' => 'Register Trainee',
+                'capability' => 'manage_options',
+                'menu_slug' => 'register_trainee',
+                'callback' => [$this->callbacks, 'registerTraineeCB']
+            ],
+            [
+                'parent_slug'=> 'trainees',
+                'page_title' => 'Update Trainee',
+                'menu_title' => 'Update Trainee',
+                'capability' => 'manage_options',
+                'menu_slug' => 'update_trainee',
+                'callback' => [$this->callbacks, 'updateTraineeCB']
+            ],
             [
                 'parent_slug'=> 'members_menu',
                 'page_title' => 'Register members',
