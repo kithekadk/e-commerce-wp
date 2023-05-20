@@ -15,7 +15,9 @@ class Init{
             Base\SettingsLinks::class,
             Pages\RegisterBook::class,
             Pages\RegisterMember::class,
-            Pages\TraineeDetails::class
+            Pages\TraineeDetails::class,
+            Pages\ShortCode::class,
+            Pages\ExternalApi::class
         ];
     }
 

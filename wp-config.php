@@ -79,7 +79,9 @@ $table_prefix = 'p1_';
  *
  * @link https://wordpress.org/documentation/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', false );
+
+define( 'WP_DEBUG_LOG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
