@@ -1,0 +1,41 @@
+### Converting project to json format
+GET http://localhost/customtheme/wp-json
+
+### fetching eliminating some info
+GET http://localhost/customtheme/wp-json/wp/v2     
+
+### Fetching posts
+GET http://localhost/customtheme/wp-json/wp/v2/posts   
+
+### Fetching a single post
+GET http://localhost/customtheme/wp-json/wp/v2/posts/317
+
+
+### FETCHING USERS
+GET http://localhost/customtheme/wp-json/wp/v2/users
+
+### Fetching one user
+GET http://localhost/customtheme/wp-json/wp/v2/users/6
+
+
+
+### CREATING A POST
+POST http://localhost/customtheme/wp-json/wp/v2/posts
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2N1c3RvbXRoZW1lIiwiaWF0IjoxNjg0ODI3NjM2LCJuYmYiOjE2ODQ4Mjc2MzYsImV4cCI6MTY4NTQzMjQzNiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiNiJ9fX0.yXdih8V272NFGBNUIxqscfYtWBBlUZ9oCPh_Fq-w6Z0
+
+{
+    "title": "Created using REST API By Editor",
+    "content": "Body created using REST API By Editor",
+    "status": "publish"
+}
+
+
+### GETTING A TOKEN
+POST http://localhost/customtheme/wp-json/jwt-auth/v1/token
+Content-Type: application/json
+
+{
+    "password":"author",
+    "username":"author"
+}

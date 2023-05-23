@@ -83,6 +83,8 @@ define( 'WP_DEBUG', false );
 
 define( 'WP_DEBUG_LOG', true );
 
+define ('JWT_AUTH_SECRET_KEY', 'JBSIGIOYN');
+
 /* Add any custom values between this line and the "stop editing" line. */
 
 

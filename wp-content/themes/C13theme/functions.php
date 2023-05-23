@@ -281,3 +281,24 @@ function time_to_go($timestamp){
         }
     }
 }
+
+/**
+ * WORDPRESS REST API
+ * 
+ * 
+ * Creating custom field REST API
+ */
+
+ function custom_field_rest_api(){
+    register_rest_field('post', 'custom_field1', ['get_callback'=>'get_custom_field']);
+ }
+
+ function get_custom_field($obj){
+    $post_id = $obj['id'];
+
+    echo '<pre>'; print_r($post_id); '</pre>';
+
+    return get_post_meta($post_id, 'customField1', true);
+ }
+
+ add_action('rest_api_init', 'custom_field_rest_api');
