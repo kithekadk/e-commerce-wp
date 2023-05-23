@@ -39,3 +39,12 @@ Content-Type: application/json
     "password":"author",
     "username":"author"
 }
+
+###converting project to json format
+http://localhost/sample/wp-json
+###fetcing eliminating some info
+http://localhost/sample/wp-json/wp/v2
+###fetching posts
+http://localhost/sample/wp-json/wp/v2/posts/9
+###fetching users
+http://localhost/sample/wp-json/wp/v2/users
