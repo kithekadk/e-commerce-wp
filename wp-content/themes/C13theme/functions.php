@@ -291,6 +291,28 @@ function time_to_go($timestamp){
 
  function custom_field_rest_api(){
     register_rest_field('post', 'custom_field1', ['get_callback'=>'get_custom_field']);
+
+    register_rest_route('portfolios/v1', 'c13-portfolios', [
+        'callback'=>'get_c13_portfolios',
+        'method'=>'GET',
+        'permission_callback'=>'custom_endpoint_permission',
+        'args'=>[
+            'meta_key'=>[
+                'required'=>true,
+                'default'=> '_edit_last',
+                'validate_callback'=>function($param, $request, $key){
+                    return !is_numeric($param);
+                }
+            ],
+            'meta_value'=>[
+                'required'=>true,
+                'default'=>1,
+                'validate_callback'=>function($param, $request, $key){
+                    return is_numeric($param);
+                }
+            ]
+        ]
+    ]);
  }
 
  function get_custom_field($obj){
@@ -302,3 +324,35 @@ function time_to_go($timestamp){
  }
 
  add_action('rest_api_init', 'custom_field_rest_api');
+
+
+ function get_c13_portfolios(WP_REST_Request $request){
+    // echo '<pre>'; print_r($request); '</pre>';
+
+    $meta_key = $request->get_param('meta_key');
+    $meta_value = $request->get_param('meta_value');
+
+    $args = [
+        'post_type'=> 'portfolio',
+        'status'=>'publish',
+        'posts_per_query'=>10,
+        'meta_query'=>[[
+            'key'=> $meta_key,
+            'value'=>$meta_value
+        ]]
+    ];
+
+    $the_query = new WP_Query($args);
+
+    $portfolios = $the_query->posts;
+
+    return $portfolios;
+ }
+
+function custom_endpoint_permission(){
+    if (is_user_logged_in()){
+        return true;
+    }else{
+        return false;
+    }
+}

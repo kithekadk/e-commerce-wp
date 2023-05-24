@@ -1,2 +1,0 @@
-18 05 2023 9:41:am cURL error 6: Could not resolve host: jsonplaceholder.typicogdsgadde.com
-18 05 2023 9:42:am cURL error 6: Could not resolve host: jsonplaceholder.typicogdsgadde.com
