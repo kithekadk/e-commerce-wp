@@ -292,7 +292,10 @@ function time_to_go($timestamp){
  function custom_field_rest_api(){
     register_rest_field('post', 'custom_field1', ['get_callback'=>'get_custom_field']);
 
-    register_rest_route('portfolios/v1', 'c13-portfolios', [
+    register_rest_route(    
+        'portfolios/v1', 
+        'c13-portfolios', 
+        [
         'callback'=>'get_c13_portfolios',
         'method'=>'GET',
         'permission_callback'=>'custom_endpoint_permission',
@@ -311,8 +314,37 @@ function time_to_go($timestamp){
                     return is_numeric($param);
                 }
             ]
+            ],
+        'schema'=> 'myportfolio_schema'
+        ]);
+ }
+
+ function myportfolio_schema(){
+    $schema = [
+        'schema'=>'',
+        'title'=> 'all-portfolios',
+        'type'=> 'object',
+        'properties'=>[
+            'idjk'=>[
+                'description'=>esc_html__('Unique identifier of the the object', 'my-textdomain'),
+                'type'=>'integer'
+            ],
+            'author'=>[
+                'description'=>esc_html__('The creator of the object', 'my-textdomain'),
+                'type'=> 'integer'
+            ],
+            'title'=>[
+                'desctiption'=>esc_html__('This is the title of the portfolio', 'my-textdomain'),
+                'type'=>'string'
+            ],  
+            'content'=>[
+                'description'=>esc_html__('The content of the portfolios', 'my-textdomain'),
+                'type'=>'string'
+            ]
         ]
-    ]);
+    ];
+
+    return $schema;
  }
 
  function get_custom_field($obj){
@@ -322,8 +354,6 @@ function time_to_go($timestamp){
 
     return get_post_meta($post_id, 'customField1', true);
  }
-
- add_action('rest_api_init', 'custom_field_rest_api');
 
 
  function get_c13_portfolios(WP_REST_Request $request){
@@ -346,9 +376,58 @@ function time_to_go($timestamp){
 
     $portfolios = $the_query->posts;
 
-    return $portfolios;
+    if(empty($portfolios)){
+        return new WP_Error(
+            'no_data_found',
+            'No Data Found',
+            [
+                'status'=> 404
+            ]
+        );
+    }
+
+    foreach($portfolios as $portfolio){
+        $response = custom_rest_prepare_post($portfolio, $request);
+        $data[] = custom_prepare_for_collection($response);
+    }
+
+    return rest_ensure_response($data);
  }
 
+function custom_rest_prepare_post($post, $request){
+    $post_data = [];
+    $schema = myportfolio_schema();
+
+    if(isset($schema['properties']['id'])){
+        $post_data['id'] = (int) $post->ID;
+    }
+    if(isset($schema['properties']['author'])){
+        $post_data['author'] = (int) $post->post_author;
+    }
+    if(isset($schema['properties']['content'])){
+        $post_data['content'] = apply_filters('post_text', $post->post_content, $post);
+    }
+    if(isset($schema['properties']['title'])){
+        $post_data['title'] = apply_filters('post_title', $post->post_title, $post);
+    }
+
+    return rest_ensure_response($post_data);
+}
+
+function custom_prepare_for_collection($response){
+    if(!($response instanceof WP_REST_Response)){
+        return $response;
+    }
+
+    $data = (array) $response->get_data();
+    $links = rest_get_server()::get_compact_response_links($response);
+
+    if(!empty($links)){
+        $data['_links'] = $links;
+    }
+
+    return $data;
+}
 function custom_endpoint_permission(){
     if (is_user_logged_in()){
         return true;
@@ -356,3 +435,5 @@ function custom_endpoint_permission(){
         return false;
     }
 }
+
+add_action('rest_api_init', 'custom_field_rest_api');
