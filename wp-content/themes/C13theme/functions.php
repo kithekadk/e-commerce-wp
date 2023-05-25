@@ -325,7 +325,7 @@ function time_to_go($timestamp){
         'title'=> 'all-portfolios',
         'type'=> 'object',
         'properties'=>[
-            'idjk'=>[
+            'id'=>[
                 'description'=>esc_html__('Unique identifier of the the object', 'my-textdomain'),
                 'type'=>'integer'
             ],
