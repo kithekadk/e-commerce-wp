@@ -57,6 +57,7 @@ class My_Portfolios_REST_Controller{
     }
 
     public function get_portfolios(WP_REST_Request $request){
+        return 'Call';
         $meta_key = $request->get_param('meta_key');
         $meta_value = $request->get_param('meta_value');
 
