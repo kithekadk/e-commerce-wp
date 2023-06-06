@@ -437,3 +437,53 @@ function custom_endpoint_permission(){
 }
 
 add_action('rest_api_init', 'custom_field_rest_api');
+
+
+// CREATING A USER AND ENCRYPTING THEIR PASSWORD
+function encrypting_user_passwords(){
+    if (isset($_POST['submitnewUserbtn'])){
+        global $wpdb;
+        $table_name = $wpdb->prefix.'users_new';
+        $pwd = $_POST['password'];
+        $hashed_pwd = wp_hash_password($pwd);
+        $user_data =[
+            'username' => $_POST['username'],
+            'useremail' => $_POST['useremail'],
+            'phone' => $_POST['phone'],
+            'password' => $hashed_pwd
+        ];
+    
+        $result = $wpdb->insert($table_name, $user_data);
+    
+        if($result == true){
+            // $successmessage = true;
+            echo "<script> alert('User Registered successfully'); </script>";
+        }else{
+            // $errormessage = true;
+            echo "<script> alert('Unable to Register'); </script>";
+        }
+    }
+}
+
+add_action('init','encrypting_user_passwords');
+
+function compare_passwords(){
+    global $wpdb;
+
+    $result = $wpdb->get_results("SELECT * FROM p1_users_new WHERE username = 'Kitheka'");
+
+    // var_dump($result[0]->password);
+
+    $hashedpwd = $result[0]->password;
+
+    if(wp_check_password('KITHEKA', $hashedpwd)){
+        // echo "<script> alert('Passwords match'); </script>";
+    }else{
+        // var_dump('Dont match');
+        // echo "<script> alert('Passwords don't match'); </script>";
+    }
+
+    
+}
+
+add_action('init','compare_passwords');
