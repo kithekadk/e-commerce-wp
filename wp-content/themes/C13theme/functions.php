@@ -439,51 +439,64 @@ function custom_endpoint_permission(){
 add_action('rest_api_init', 'custom_field_rest_api');
 
 
-// CREATING A USER AND ENCRYPTING THEIR PASSWORD
-function encrypting_user_passwords(){
-    if (isset($_POST['submitnewUserbtn'])){
+function encrypting_user_pwds(){
+    
         global $wpdb;
+
         $table_name = $wpdb->prefix.'users_new';
+
+        $new_user_tbl = "CREATE TABLE IF NOT EXISTS ".$table_name."(
+            username text NOT NULL,
+            useremail text NOT NULL,
+            phone int NOT NULL,
+            password text NOT NULL
+        );";
+
+        require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+
+        dbDelta($new_user_tbl);
+
+    if (isset($_POST['btnSubmitUser'])){
+
         $pwd = $_POST['password'];
         $hashed_pwd = wp_hash_password($pwd);
-        $user_data =[
-            'username' => $_POST['username'],
-            'useremail' => $_POST['useremail'],
-            'phone' => $_POST['phone'],
-            'password' => $hashed_pwd
+
+        $user_data = [
+            'username'=>$_POST['username'],
+            'useremail'=>$_POST['useremail'],
+            'phone'=> $_POST['phoneno'],
+            'password'=>$hashed_pwd
         ];
-    
+
+        // var_dump($user_data);
+
         $result = $wpdb->insert($table_name, $user_data);
-    
-        if($result == true){
-            // $successmessage = true;
-            echo "<script> alert('User Registered successfully'); </script>";
+
+        if ($result){
+            echo "<script>alert('User created successfully');</script>";
         }else{
-            // $errormessage = true;
-            echo "<script> alert('Unable to Register'); </script>";
+            echo "<script>alert('User Not created');</script>";
         }
+
     }
 }
 
-add_action('init','encrypting_user_passwords');
+add_action('init', 'encrypting_user_pwds');
 
-function compare_passwords(){
+function compare_password(){
     global $wpdb;
+    $table_name = $wpdb->prefix.'users_new';
 
-    $result = $wpdb->get_results("SELECT * FROM p1_users_new WHERE username = 'Kitheka'");
+    $result = $wpdb->get_results("SELECT * FROM $table_name WHERE username = 'Mwaniki'");
 
-    // var_dump($result[0]->password);
+    var_dump($result[0]->password);
+    $hashed_pwd = $result[0]->password;
 
-    $hashedpwd = $result[0]->password;
-
-    if(wp_check_password('KITHEKA', $hashedpwd)){
-        // echo "<script> alert('Passwords match'); </script>";
+    if( wp_check_password('12345', $hashed_pwd)){
+        var_dump('PASSWORD MATCH');
     }else{
-        // var_dump('Dont match');
-        // echo "<script> alert('Passwords don't match'); </script>";
+        var_dump('Password dont match');
     }
-
-    
 }
 
-add_action('init','compare_passwords');
+add_action('init', 'compare_password');
