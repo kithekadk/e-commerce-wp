@@ -483,20 +483,20 @@ function encrypting_user_pwds(){
 
 add_action('init', 'encrypting_user_pwds');
 
-function compare_password(){
-    global $wpdb;
-    $table_name = $wpdb->prefix.'users_new';
+// function compare_password(){
+//     global $wpdb;
+//     $table_name = $wpdb->prefix.'users_new';
 
-    $result = $wpdb->get_results("SELECT * FROM $table_name WHERE username = 'Mwaniki'");
+//     $result = $wpdb->get_results("SELECT * FROM $table_name WHERE username = 'Mwaniki'");
 
-    var_dump($result[0]->password);
-    $hashed_pwd = $result[0]->password;
+//     var_dump($result[0]->password);
+//     $hashed_pwd = $result[0]->password;
 
-    if( wp_check_password('12345', $hashed_pwd)){
-        var_dump('PASSWORD MATCH');
-    }else{
-        var_dump('Password dont match');
-    }
-}
+//     if( wp_check_password('12345', $hashed_pwd)){
+//         var_dump('PASSWORD MATCH');
+//     }else{
+//         var_dump('Password dont match');
+//     }
+// }
 
-add_action('init', 'compare_password');
+// add_action('init', 'compare_password');
