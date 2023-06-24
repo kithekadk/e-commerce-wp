@@ -39,3 +39,13 @@ Content-Type: application/json
     "password":"author",
     "username":"author"
 }
+
+### CREATE A BOOK
+POST http://localhost/customtheme/wp-json/booksapi/v1/create
+Content-Type: application/json
+
+{
+    "author":"C. MUTURI",
+    "title":" My First title",
+    "publisher": "Macmillan"
+}

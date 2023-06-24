@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Book Registration
+ * Template Name: Login Template
  */
 
  get_header(); 
@@ -13,7 +13,7 @@
     <!-- Success message popup -->
     <?php
         echo '<div class="alert alert-success" role="alert" id="successmsg">
-                Book Registered Successfully
+                Logged In successfully
              </div>';
 
         echo '<script> document.getElementById("successmsg").style.display = "none"; </script>';
@@ -37,7 +37,7 @@
     <!-- Error message popup -->
     <?php
         echo '<div class="alert alert-danger" role="alert" id="errormsg">
-                Book not registered, please login 
+                Unable to login
              </div>';
 
         echo '<script> document.getElementById("errormsg").style.display = "none"; </script>';
@@ -56,18 +56,15 @@
     <div class="row justify-content-center">
         <form action="" method="post" style="width:40vw; box-shadow: 3px 3px 3px 3px grey; padding:30px; ">
             <div class="form-group">
-                <input type="text" name="title" id="title" class="form-control input-sm mb-3" placeholder="Input Book Title" required>
+                <input type="text" name="username" id="username" class="form-control input-sm mb-3" placeholder="Input Username" required>
             </div>
             <div class="form-group">
-                <input type="text" name="author" id="author" class="form-control input-sm mb-3" placeholder="Input Book Author Name" required>
-            </div>
-            <div class="form-group">
-                <input type="text" name="publisher" id="publisher" class="form-control input-sm mb-3" placeholder="Input Book Publisher" required>
+                <input type="text" name="password" id="password" class="form-control input-sm mb-3" placeholder="Input Password" required>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-xs-4 col-sm-4 col-md-4">
-                    <input type="submit" value="Register Book" name="submitbtn" class="btn btn-primary">
+                    <input type="submit" value="Login" name="submitlogin" class="btn btn-primary">
                 </div>
             </div>
         </form>

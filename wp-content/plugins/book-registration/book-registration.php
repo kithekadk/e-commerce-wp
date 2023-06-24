@@ -63,16 +63,31 @@ class BookReg{
             $successmessage = false;
             $errormessage = false;
 
-            $table_name = $wpdb->prefix.'books';
+            // $table_name = $wpdb->prefix.'books';
 
-            $result = $wpdb->insert($table_name, $data, $format=NULL);
+            $token = $_COOKIE['token'];
+
+
+            // $result = $wpdb->insert($table_name, $data, $format=NULL);
+            $result = wp_remote_post('http://localhost/customtheme/wp-json/booksapi/v1/create', [
+                'method'=>'POST',
+                'body'=> json_encode($data),
+                'headers'=>[
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]);
+
+            echo '<pre>';
+            var_dump($result);
+            echo '<pre>';
 
             if($result == true){
                 $successmessage = true;
-                echo "<script> alert('Book Registered successfully'); </script>";
+                // echo "<script> alert('Book Registered successfully'); </script>";
             }else{
                 $errormessage = true;
-                echo "<script> alert('Unable to Register'); </script>";
+                // echo "<script> alert('Unable to Register'); </script>";
             }
         }
     }

@@ -289,6 +289,7 @@ function time_to_go($timestamp){
  * Creating custom field REST API
  */
 
+
  function custom_field_rest_api(){
     register_rest_field('post', 'custom_field1', ['get_callback'=>'get_custom_field']);
 
@@ -319,6 +320,64 @@ function time_to_go($timestamp){
         ]);
  }
 
+ function register_book_routes(){
+    register_rest_route(
+        'booksapi/v1',
+        '/create',
+        [
+            'callback'=>'register_book',
+            'methods'=>'POST',
+            'permission_callback'=>'register_book_permission'
+        ]
+    );
+}
+
+ function register_book($request){
+    $title = sanitize_text_field($request->get_param('title'));
+    $author = sanitize_text_field($request->get_param('author'));
+    $publisher = sanitize_text_field($request->get_param('publisher'));
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'books';
+    $id = wp_generate_uuid4();
+
+    $result = $wpdb->insert(
+        $table_name,
+        [
+            'bookid'=> $id,
+            'title' => $title,
+            'author' => $author,
+            'publisher'=> $publisher
+        ]
+    );
+
+    if($result){
+    $response = array(
+        'message'=> 'Book Created successfully',
+        'bookid'=> $id,
+        'title' => $title,
+        'author' => $author,
+        'publisher'=> $publisher
+    );
+    return new WP_REST_Response($response, 201);
+    }else{
+        $response = [
+            'message'=> 'Book not created'
+        ];
+        return new WP_REST_Response($response, 404);
+    }
+
+    
+ }
+
+
+ function register_book_permission(){
+    if (current_user_can('administrator')) {
+        return true;
+    } else {
+        return false;
+    }
+}
  function myportfolio_schema(){
     $schema = [
         'schema'=>'',
@@ -437,7 +496,7 @@ function custom_endpoint_permission(){
 }
 
 add_action('rest_api_init', 'custom_field_rest_api');
-
+add_action('rest_api_init', 'register_book_routes');
 
 function encrypting_user_pwds(){
     
@@ -500,3 +559,8 @@ add_action('init', 'encrypting_user_pwds');
 // }
 
 // add_action('init', 'compare_password');
+
+
+function gettingToken(){
+
+}
